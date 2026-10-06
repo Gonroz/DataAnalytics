@@ -1,0 +1,9 @@
+SELECT
+	dmm.driver_id,
+	ROUND(AVG(on_time_delivery_rate),3) AS avg_on_time_rate
+FROM driver_monthly_metrics AS dmm
+LEFT JOIN drivers AS d
+ON dmm.driver_id = d.driver_id
+WHERE employment_status = "Active"
+GROUP BY dmm.driver_id
+ORDER BY avg_on_time_rate DESC;
